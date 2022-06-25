@@ -21,7 +21,7 @@
             <path d="M21 21l-4.35-4.35"></path>
           </svg>
         </div>
-        <button class="add-btn" @click="openModal">
+        <button class="add-btn" @click="toggleCreateModal">
           <svg
             class="btn-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -52,21 +52,26 @@
       <table class="table">
         <tr class="table-header">
           <th>Id</th>
+          <th>Order Id</th>
           <th>Invoice Id</th>
           <th>Name</th>
-          <th>Date Issued</th>
+          <th>Date</th>
           <th>Status</th>
           <th></th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>1236</td>
+        <tr v-for="(order, index) in orderList" :key="order.orderId">
+          <td>{{ incrementIndex(index) }}</td>
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.invoiceId }}</td>
           <td>
-            <span>Mr Uzumaki Naruto</span>
+            {{ order.customerName }}
           </td>
-          <td>17/06/2022</td>
+          <td>{{ order.date }}</td>
           <td>
-            <div class="status status-completed">
+            <div
+              class="status status-completed"
+              v-if="order.status == 'completed'"
+            >
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -79,62 +84,7 @@
               </svg>
               Completed
             </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>1275</td>
-          <td>Mr Satoshi Nakamoto</td>
-          <td>19/09/2022</td>
-          <td>
-            <div class="status status-cancelled">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M18 6L6 18M6 6l12 12"></path>
-              </svg>
-              Cancelled
-            </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>1235</td>
-          <td>Mr Ryuuguji Ken</td>
-          <td>16/12/2021</td>
-          <td>
-            <div class="status status-pending">
+            <div class="status status-pending" v-if="order.status == 'pending'">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -153,64 +103,10 @@
               </svg>
               Pending
             </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
+            <div
+              class="status status-cancelled"
+              v-if="order.status == 'cancelled'"
             >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>1233</td>
-          <td>
-            <span>Mr Gon Freecs</span>
-          </td>
-          <td>12/03/2022</td>
-          <td>
-            <div class="status status-completed">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-              Completed
-            </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>3453</td>
-          <td>Mr Killua Zoldyk</td>
-          <td>16/07/2021</td>
-          <td>
-            <div class="status status-cancelled">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -225,298 +121,169 @@
             </div>
           </td>
           <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>1723</td>
-          <td>Mr Ilumi Zoldyk</td>
-          <td>21/02/2022</td>
-          <td>
-            <div class="status status-pending">
+            <div class="option">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-loader"
+                viewBox="0 0 128 512"
+                width="20"
+                height="20"
+                class="option-icon"
               >
                 <path
-                  d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-                ></path>
+                  d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
+                />
               </svg>
-              Pending
+              <div class="option-menu">
+                <div class="menu-item" @click="toggleEditModal(order.orderId)">
+                  Edit
+                </div>
+                <div class="menu-item">Cancel</div>
+                <div class="menu-item">Delete</div>
+              </div>
             </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>6123</td>
-          <td>
-            <span>Mr Heathcliff</span>
-          </td>
-          <td>16/09/2021</td>
-          <td>
-            <div class="status status-completed">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-              Completed
-            </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>1239</td>
-          <td>Mr Akihiko Kayaba</td>
-          <td>19/07/2021</td>
-          <td>
-            <div class="status status-cancelled">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M18 6L6 18M6 6l12 12"></path>
-              </svg>
-              Cancelled
-            </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>9</td>
-          <td>2768</td>
-          <td>Mr Hikigaya Hachiman</td>
-          <td>8/08/2021</td>
-          <td>
-            <div class="status status-pending">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-loader"
-              >
-                <path
-                  d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-                ></path>
-              </svg>
-              Pending
-            </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td>1723</td>
-          <td>
-            <span>Mr Akashi Seijuro</span>
-          </td>
-          <td>17/06/2022</td>
-          <td>
-            <div class="status status-completed">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-              Completed
-            </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>11</td>
-          <td>1980</td>
-          <td>Mr AJ Raikage</td>
-          <td>11/09/2019</td>
-          <td>
-            <div class="status status-cancelled">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M18 6L6 18M6 6l12 12"></path>
-              </svg>
-              Cancelled
-            </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
-          </td>
-        </tr>
-        <tr>
-          <td>12</td>
-          <td>1998</td>
-          <td>Mr Kuroko Tetsuya</td>
-          <td>16/07/2022</td>
-          <td>
-            <div class="status status-pending">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-loader"
-              >
-                <path
-                  d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-                ></path>
-              </svg>
-              Pending
-            </div>
-          </td>
-          <td>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 512"
-              width="20"
-              height="20"
-              class="option-icon"
-            >
-              <path
-                d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-              />
-            </svg>
           </td>
         </tr>
       </table>
     </div>
   </div>
-  <CreateOrderModal :openOrderModal="openOrderModal" @closeOrderModal="openModal"/>
+  <OrderModal
+    :showModal="showModal"
+    :createModal="createModal"
+    :editModal="editModal"
+    :editOrderId="editOrderId"
+    @closeCreateModal="toggleCreateModal"
+    @closeEditModal="toggleEditModal"
+  />
 </template>
 
 <script setup>
 /*
   imports
   */
-import CreateOrderModal from "@/components/modals/CreateOrderModal.vue";
+import OrderModal from "@/components/modals/OrderModal.vue";
 import { ref, reactive } from "vue";
+
 /*
-Add Order Modal
+Toggle Show Modal
 */
-const openOrderModal = ref(false)
-const openModal = () => {
-  openOrderModal.value = !openOrderModal.value
-}
+const showModal = ref(false);
+const toggleShowModal = () => {
+  showModal.value = !showModal.value;
+};
+/*
+Toggle Create Order Modal
+*/
+const createModal = ref(false);
+const toggleCreateModal = () => {
+  toggleShowModal();
+  createModal.value = !createModal.value;
+};
+/*
+Toggle Edit Order Modal
+*/
+const editModal = ref(false);
+const editOrderId = ref("");
+const toggleEditModal = (id) => {
+  editOrderId.value = id;
+  toggleShowModal();
+  editModal.value = !editModal.value;
+};
+
+/*
+Order Data
+*/
+const orderList = reactive([
+  {
+    orderId: "ON1236",
+    invoiceId: "1236",
+    customerName: "Mr Uzumaki Naruto",
+    date: "17/06/2022",
+    status: "completed",
+  },
+  {
+    orderId: "ON1275",
+    invoiceId: "1275",
+    customerName: "Mr Satoshi Nakamoto",
+    date: "19/09/2022",
+    status: "cancelled",
+  },
+  {
+    orderId: "ON1235",
+    invoiceId: "1235",
+    customerName: "Mr Ryuuguji Ken",
+    date: "16/12/2021",
+    status: "cancelled",
+  },
+  {
+    orderId: "ON1233",
+    invoiceId: "1233",
+    customerName: "Mr Gon Freecs",
+    date: "12/03/2022",
+    status: "pending",
+  },
+  {
+    orderId: "ON3453",
+    invoiceId: "3453",
+    customerName: "Mr Killua Zoldyk",
+    date: "16/07/2021",
+    status: "completed",
+  },
+  {
+    orderId: "ON1723",
+    invoiceId: "1723",
+    customerName: "Mr Ilumi Zoldyk",
+    date: "21/02/2022",
+    status: "pending",
+  },
+  {
+    orderId: "ON6123",
+    invoiceId: "6123",
+    customerName: "Mr Heathcliff",
+    date: "16/09/2021",
+    status: "completed",
+  },
+  {
+    orderId: "ON1239",
+    invoiceId: "1239",
+    customerName: "	Mr Akihiko Kayaba",
+    date: "19/07/2021",
+    status: "cancelled",
+  },
+  {
+    orderId: "ON2768",
+    invoiceId: "2768",
+    customerName: "Mr Hikigaya Hachiman",
+    date: "08/08/2021",
+    status: "pending",
+  },
+  {
+    orderId: "ON1723",
+    invoiceId: "1723",
+    customerName: "	Mr Akashi Seijuro",
+    date: "17/06/2020",
+    status: "completed",
+  },
+  {
+    orderId: "ON1980",
+    invoiceId: "1980",
+    customerName: "Mr AJ Raikage",
+    date: "11/09/2019",
+    status: "completed",
+  },
+  {
+    orderId: "ON1998",
+    invoiceId: "1998",
+    customerName: "	Mr Kuroko Tetsuya",
+    date: "16/07/2020",
+    status: "completed",
+  },
+]);
+/*
+Increment Index key function
+*/
+const incrementIndex = (i) => {
+  return i + 1;
+};
 </script>
 
 <style scoped>
@@ -524,8 +291,8 @@ const openModal = () => {
   background: var(--dark-color2);
   padding: 40px 30px;
   width: 100%;
-  overflow: hidden;
-  border-radius: 32px;
+  overflow-y: auto;
+  height: calc(100vh - 110px);
 }
 .orders-section .section-content {
   display: flex;
@@ -581,7 +348,7 @@ const openModal = () => {
 
 /* Activity Links */
 .activity-links {
-    margin-top: 40px;
+  margin-top: 40px;
   display: flex;
   align-items: center;
 }
@@ -612,20 +379,15 @@ const openModal = () => {
   margin-top: 20px;
   padding: 0 20px;
   display: block;
-  max-height: 420px;
-  overflow-y: auto;
-}
-.option-icon {
-  color: var(--text-color);
-  fill: currentColor;
-  cursor: pointer;
+  /* max-height: 420px;
+  overflow-y: auto; */
 }
 .orders-container table {
   width: 100%;
   border-collapse: collapse;
 }
 .orders-container .table-header {
-    background-color: #212752;
+  background-color: #212752;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -669,20 +431,60 @@ tr {
   color: #3e4ec2;
 }
 .status-pending:before {
-    width: 22px;
-    height: 22px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    content: "";
-    background: #1a214d;
-    border-radius: 4px;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  background: #1a214d;
+  border-radius: 4px;
 }
 .status-pending svg {
   /* background: #2e2142; */
-  -webkit-animation:spin 4s linear infinite;
-    -moz-animation:spin 4s linear infinite;
-    animation:spin 4s linear infinite;
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+/* Option Menu */
+.option {
+  position: relative;
+}
+.option-icon {
+  color: var(--text-color);
+  fill: currentColor;
+  cursor: pointer;
+}
+.option .option-menu {
+  position: absolute;
+  background: var(--dark-color2);
+  padding: 5px 0;
+  right: -2px;
+  bottom: -2px;
+  z-index: 2;
+  transform: scale(0);
+  border-radius: 5px;
+  transform-origin: top right;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 6px rgb(0 0 0 / 15%);
+}
+.option:hover .option-menu {
+  transform: scale(1);
+}
+.option .option-menu .menu-item {
+  height: 25px;
+  font-size: 16px;
+  padding: 15px;
+  margin-bottom: 2px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.option .option-menu .menu-item:hover {
+  background: var(--dark-color1);
 }
 
 @-moz-keyframes spin {

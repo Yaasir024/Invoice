@@ -51,13 +51,13 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 15px;
   font-size: 15px;
   position: sticky;
   top: 0;
   left: 0;
   z-index: 10;
   margin-bottom: 20px;
+  max-height: 60px;
 }
 .logo {
   font-size: 18px;

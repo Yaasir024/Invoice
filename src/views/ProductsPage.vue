@@ -1,12 +1,6 @@
-// https://codepen.io/TurkAysenur/pen/NWRqoyL
-// https://codepen.io/abyeidengdit/pen/gOvjjWx?editors=1100
-
-
-
-
-
-// https://codepen.io/hanibal/details/PoQbyZO
-
+// https://codepen.io/TurkAysenur/pen/NWRqoyL //
+https://codepen.io/abyeidengdit/pen/gOvjjWx?editors=1100 //
+https://codepen.io/hanibal/details/PoQbyZO
 
 <template>
   <div class="products-section">
@@ -30,7 +24,7 @@
           <path d="M21 21l-4.35-4.35"></path>
         </svg>
       </div>
-      <button class="settings-btn">
+      <button class="settings-btn" @click="openModal">
         <svg
           class="btn-icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -305,10 +299,22 @@
       </table>
     </div>
   </div>
+  <CreateProductModal :openAddModal="openAddModal" @closeAddModal="openModal"/>
 </template>
 
-<script>
-export default {};
+<script setup>
+/*
+  imports
+  */
+import CreateProductModal from "@/components/modals/CreateProductModal.vue";
+import { ref, reactive } from "vue";
+/*
+Add product Modal
+*/
+const openAddModal = ref(false)
+const openModal = () => {
+  openAddModal.value = !openAddModal.value
+}
 </script>
 
 <style scoped>
@@ -367,11 +373,11 @@ export default {};
   justify-content: center;
 }
 /* Activity Links */
-.activity-links{
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+.activity-links {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 /* Filter */
 select {
@@ -381,16 +387,14 @@ select {
 }
 .filter-btn {
   color: #fff;
-    cursor: pointer;
-    background-color: #212752;
-    padding: 0;
-    border: 0;
-    padding: 10px 20px;
-    margin-left: 20px;
-    font-size: 15px;
+  cursor: pointer;
+  background-color: #212752;
+  padding: 0;
+  border: 0;
+  padding: 10px 20px;
+  margin-left: 20px;
+  font-size: 15px;
 }
-
-
 
 /* Order content */
 .products-container {

@@ -61,10 +61,11 @@
         <table class="table">
           <tr class="table-header">
             <th></th>
-            <th>Id</th>
+            <th>No</th>
+            <th>Delivery Number</th>
             <th>Invoice Id</th>
-            <th>Name</th>
-            <th>Date Issued</th>
+            <th>Destination</th>
+            <th>Delivery Date</th>
             <th>Status</th>
             <th></th>
           </tr>
@@ -72,11 +73,10 @@
             <td class="check">
               <input type="checkbox" name="" id="" />
             </td>
-            <td>1</td>
-            <td>1236</td>
-            <td>
-              <span>Mr Uzumaki Naruto</span>
-            </td>
+            <td>11</td>
+            <td>DN00000003</td>
+            <td>3721</td>
+            <td>Konoha</td>
             <td>17/06/2022</td>
             <td>
               <div class="status status-completed">
@@ -111,9 +111,124 @@
             <td class="check">
               <input type="checkbox" name="" id="" />
             </td>
-            <td>2</td>
-            <td>1275</td>
-            <td>Mr Satoshi Nakamoto</td>
+            <td>09</td>
+            <td>DN00000005</td>
+            <td>3321</td>
+            <td>Konoha</td>
+            <td>17/06/2022</td>
+            <td>
+              <div class="status status-completed">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 6L9 17l-5-5"></path>
+                </svg>
+                Completed
+              </div>
+            </td>
+            <td>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 512"
+                width="20"
+                height="20"
+                class="option-icon"
+              >
+                <path
+                  d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
+                />
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <td class="check">
+              <input type="checkbox" name="" id="" />
+            </td>
+            <td>10</td>
+            <td>DN00000004</td>
+            <td>3761</td>
+            <td>Jibuti</td>
+            <td>17/07/2022</td>
+            <td>
+              <div class="status status-completed">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 6L9 17l-5-5"></path>
+                </svg>
+                Completed
+              </div>
+            </td>
+            <td>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 512"
+                width="20"
+                height="20"
+                class="option-icon"
+              >
+                <path
+                  d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
+                />
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <td class="check">
+              <input type="checkbox" name="" id="" />
+            </td>
+            <td>11</td>
+            <td>DN00000003</td>
+            <td>3721</td>
+            <td>Konoha</td>
+            <td>17/06/2022</td>
+            <td>
+              <div class="status status-completed">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 6L9 17l-5-5"></path>
+                </svg>
+                Completed
+              </div>
+            </td>
+            <td>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 512"
+                width="20"
+                height="20"
+                class="option-icon"
+              >
+                <path
+                  d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
+                />
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <td class="check">
+              <input type="checkbox" name="" id="" />
+            </td>
+            <td>12</td>
+            <td>DN00000002</td>
+            <td>3711</td>
+            <td>Oosaka,Japan</td>
             <td>19/09/2022</td>
             <td>
               <div class="status status-cancelled">
@@ -148,9 +263,10 @@
             <td class="check">
               <input type="checkbox" name="" id="" />
             </td>
-            <td>3</td>
-            <td>1235</td>
-            <td>Mr Ryuuguji Ken</td>
+            <td>13</td>
+            <td>DN00000001</td>
+            <td>3621</td>
+            <td>Shibuya</td>
             <td>16/12/2021</td>
             <td>
               <div class="status status-pending">

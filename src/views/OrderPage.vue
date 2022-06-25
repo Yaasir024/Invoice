@@ -21,7 +21,7 @@
             <path d="M21 21l-4.35-4.35"></path>
           </svg>
         </div>
-        <button class="add-btn">
+        <button class="add-btn" @click="openModal">
           <svg
             class="btn-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -501,10 +501,22 @@
       </table>
     </div>
   </div>
+  <CreateOrderModal :openOrderModal="openOrderModal" @closeOrderModal="openModal"/>
 </template>
 
-<script>
-export default {};
+<script setup>
+/*
+  imports
+  */
+import CreateOrderModal from "@/components/modals/CreateOrderModal.vue";
+import { ref, reactive } from "vue";
+/*
+Add Order Modal
+*/
+const openOrderModal = ref(false)
+const openModal = () => {
+  openOrderModal.value = !openOrderModal.value
+}
 </script>
 
 <style scoped>

@@ -18,7 +18,7 @@ import Header from "@/components/Header.vue";
 @import "@/assets/base.css";
 main {
   width: 100%;
-  padding: 25px 5px;
+  padding: 0px 5px 25px 6px;
 }
 /* header {
   height: 40px;
@@ -27,7 +27,7 @@ main {
   margin-bottom: 20px;
 } */
 .app-wrapper {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 0 20px;
   background: var(--dark-color1);

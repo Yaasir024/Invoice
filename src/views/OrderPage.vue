@@ -42,10 +42,34 @@
     </div>
     <!-- Activity Link -->
     <div class="activity-links">
-      <div class="activity-link active">All</div>
-      <div class="activity-link">Completed</div>
-      <div class="activity-link">Pending</div>
-      <div class="activity-link">Cancelled</div>
+      <div
+        class="activity-link all"
+        @click="filter('all')"
+        :class="filterValue == 'all' ? 'active' : ''"
+      >
+        All
+      </div>
+      <div
+        class="activity-link completed"
+        @click="filter('completed')"
+        :class="filterValue == 'completed' ? 'active' : ''"
+      >
+        Completed
+      </div>
+      <div
+        class="activity-link pending"
+        @click="filter('pending')"
+        :class="filterValue == 'pending' ? 'active' : ''"
+      >
+        Pending
+      </div>
+      <div
+        class="activity-link cancelled"
+        @click="filter('cancelled')"
+        :class="filterValue == 'cancelled' ? 'active' : ''"
+      >
+        Cancelled
+      </div>
     </div>
     <!-- Orders container -->
     <div class="orders-container">
@@ -162,6 +186,14 @@
   */
 import OrderModal from "@/components/modals/OrderModal.vue";
 import { ref, reactive } from "vue";
+/*
+Toggle Show Modal
+*/
+const filterValue = ref("completed");
+const filter = (value) => {
+  filterValue.value = value;
+  console.log(filterValue.value, value);
+};
 
 /*
 Toggle Show Modal

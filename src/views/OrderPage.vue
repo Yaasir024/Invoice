@@ -22,21 +22,23 @@
           </svg>
         </div>
         <button class="add-btn" @click="toggleCreateModal">
-          <svg
-            class="btn-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
+          <div class="btn-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <span>New Order</span>
         </button>
       </div>
     </div>
@@ -75,22 +77,23 @@
     <div class="orders-container">
       <table class="table">
         <tr class="table-header">
-          <th>Id</th>
+          <th>No</th>
           <th>Order Id</th>
           <th>Invoice Id</th>
-          <th>Name</th>
           <th>Date</th>
+          <th>Name</th>
+          <th>Price</th>
           <th>Status</th>
-          <th></th>
         </tr>
-        <tr v-for="(order, index) in orderList" :key="order.orderId">
+        <tr v-for="(order, index) in filteredOrders" :key="order.orderId">
           <td>{{ incrementIndex(index) }}</td>
-          <td>{{ order.orderId }}</td>
+          <td>#{{ order.orderId }}</td>
           <td>{{ order.invoiceId }}</td>
+          <td>{{ order.date }}</td>
           <td>
             {{ order.customerName }}
           </td>
-          <td>{{ order.date }}</td>
+          <th>$20000</th>
           <td>
             <div
               class="status status-completed"
@@ -144,28 +147,6 @@
               Cancelled
             </div>
           </td>
-          <td>
-            <div class="option">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 128 512"
-                width="20"
-                height="20"
-                class="option-icon"
-              >
-                <path
-                  d="M64 360C94.93 360 120 385.1 120 416C120 446.9 94.93 472 64 472C33.07 472 8 446.9 8 416C8 385.1 33.07 360 64 360zM64 200C94.93 200 120 225.1 120 256C120 286.9 94.93 312 64 312C33.07 312 8 286.9 8 256C8 225.1 33.07 200 64 200zM64 152C33.07 152 8 126.9 8 96C8 65.07 33.07 40 64 40C94.93 40 120 65.07 120 96C120 126.9 94.93 152 64 152z"
-                />
-              </svg>
-              <div class="option-menu">
-                <div class="menu-item" @click="toggleEditModal(order.orderId)">
-                  Edit
-                </div>
-                <div class="menu-item">Cancel</div>
-                <div class="menu-item">Delete</div>
-              </div>
-            </div>
-          </td>
         </tr>
       </table>
     </div>
@@ -185,14 +166,30 @@
   imports
   */
 import OrderModal from "@/components/modals/OrderModal.vue";
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 /*
-Toggle Show Modal
+Computing Filtered orders
 */
-const filterValue = ref("completed");
+const filteredOrders = computed(() => {
+  return orderList.filter((order) => {
+    if (filterValue.value === "completed") {
+      return order.status === "completed";
+    }
+    if (filterValue.value === "pending") {
+      return order.status === "pending";
+    }
+    if (filterValue.value === "cancelled") {
+      return order.status === "cancelled";
+    }
+    return order;
+  });
+});
+/*
+Filter
+*/
+const filterValue = ref("all");
 const filter = (value) => {
   filterValue.value = value;
-  console.log(filterValue.value, value);
 };
 
 /*
@@ -289,7 +286,7 @@ const orderList = reactive([
     status: "pending",
   },
   {
-    orderId: "ON1723",
+    orderId: "ON1753",
     invoiceId: "1723",
     customerName: "	Mr Akashi Seijuro",
     date: "17/06/2020",
@@ -321,7 +318,7 @@ const incrementIndex = (i) => {
 <style scoped>
 .orders-section {
   background: var(--dark-color2);
-  padding: 40px 30px;
+  padding: 30px 30px;
   width: 100%;
   overflow-y: auto;
   height: calc(100vh - 110px);
@@ -368,19 +365,27 @@ const incrementIndex = (i) => {
   color: #fff;
   cursor: pointer;
   background-color: #212752;
-  padding: 0;
+  padding: 8px 10px;
   border: 0;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  border-radius: 40px;
+  /* width: 32px; */
+  /* height: 32px; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.btn-icon {
+  margin-right: 8px;
+  padding: 7px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  color: #212752;
+}
 
 /* Activity Links */
 .activity-links {
-  margin-top: 40px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
 }
@@ -408,11 +413,11 @@ const incrementIndex = (i) => {
 }
 /* Order content */
 .orders-container {
-  margin-top: 20px;
-  padding: 0 20px;
+  /* padding: 0 20px; */
   display: block;
-  /* max-height: 420px;
-  overflow-y: auto; */
+  /* width: 760px;
+  margin: 0 auto; */
+  margin-top: 20px;
 }
 .orders-container table {
   width: 100%;

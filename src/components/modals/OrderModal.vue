@@ -155,7 +155,7 @@
               <th class="item-name">Item Name</th>
               <th class="qty">Qty</th>
               <th class="price">Price</th>
-              <th class="total">Toal</th>
+              <th class="total">Total</th>
             </tr>
             <tr
               class="table-items flex"
@@ -186,8 +186,21 @@
             </tr>
           </table>
 
-          <div @click="addNewInvoiceItem" class="flex button">
-            <img src="@/assets/icon-plus.svg" alt="" />
+          <div @click="addNewInvoiceItem" class="flex add-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
             Add New Item
           </div>
         </div>
@@ -238,6 +251,13 @@ const invoiceData = reactive({
 </script>
 
 <style scoped>
+/* Basic */
+.flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
 .modal-wrap {
   position: fixed;
   top: 0;
@@ -245,6 +265,8 @@ const invoiceData = reactive({
   width: 100%;
   height: 100vh;
   transition: all 0.32s ease-in-out;
+  z-index: 5;
+  overflow-y: auto;
 }
 .modal-content {
   position: relative;
@@ -259,5 +281,84 @@ const invoiceData = reactive({
 .modal-content h3 {
   margin-bottom: 16px;
   font-size: 18px;
+}
+.modal-content h4 {
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+/* Bill to & Bill From */
+.bill-to,
+.bill-from {
+  margin-bottom: 48px;
+}
+.location-details {
+  gap: 16px;
+}
+.location-details div {
+  flex: 1;
+}
+/* Invoice Work */
+.invoice-work .payment {
+  gap: 24px;
+}
+.invoice-work .payment div {
+  flex: 1;
+}
+.work-items .item-list {
+  width: 100%;
+}
+/* Item Table Styling */
+.table-heading,
+.table-items {
+  gap: 16px;
+  font-size: 12px;
+}
+.item-name {
+  flex-basis: 50%;
+}
+.qty {
+  flex-basis: 10%;
+}
+.price {
+  flex-basis: 20%;
+}
+.total {
+  flex-basis: 20%;
+  align-self: center;
+}
+.table-heading {
+  margin-bottom: 16px;
+}
+.table-heading th {
+  text-align: left;
+}
+.add-button {
+  color: var(--light-color);
+  cursor: pointer;
+  background-color: #212752;
+  padding: 8px 10px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.add-button svg {
+  margin-right: 4px;
+}
+.input {
+  margin-bottom: 24px;
+}
+label {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+input,
+select {
+  width: 100%;
+  color: var(--light-color);
+  background-color: var(--dark-color3);
+  border-radius: 4px;
+  padding: 12px 4px;
+  border: none;
 }
 </style>

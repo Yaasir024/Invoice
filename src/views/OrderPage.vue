@@ -362,7 +362,7 @@ const incrementIndex = (i) => {
   color: var(--text-color);
 }
 .add-btn {
-  color: #fff;
+  color: var(--light-color);
   cursor: pointer;
   background-color: #212752;
   padding: 8px 10px;
@@ -377,7 +377,7 @@ const incrementIndex = (i) => {
 .btn-icon {
   margin-right: 8px;
   padding: 7px;
-  background: #fff;
+  background: var(--light-color);
   border-radius: 50%;
   display: flex;
   color: #212752;

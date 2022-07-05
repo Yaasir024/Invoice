@@ -205,6 +205,16 @@
           </div>
         </div>
       </div>
+      <!-- Buttons Section -->
+      <div class="btn-section flex">
+        <div class="left">
+          <button type="button" class="btn red" @click="$emit('closeCreateModal')">Cancel</button>
+        </div>
+        <div class="right flex">
+          <button type="button" class="btn blue">Save Draft</button>
+          <button type="button" class="btn green">Create Invoice</button>
+        </div>
+      </div>
     </form>
     <div class="create-modal"></div>
     <div class="edit-modal" v-if="editModal"></div>
@@ -337,13 +347,41 @@ const invoiceData = reactive({
   cursor: pointer;
   background-color: #212752;
   padding: 8px 10px;
-  border-radius: 50%;
+  border-radius: 40px;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 .add-button svg {
   margin-right: 4px;
+}
+.btn-section {
+  margin-top: 60px;
+}
+.btn-section div {
+  flex: 1;
+}
+.btn-section .right {
+  justify-content: flex-end;
+}
+.btn {
+  color: var(--light-color);
+  cursor: pointer;
+  background-color: #212752;
+
+  padding: 14px 18px;
+  border-radius: 40px;
+  border: none;
+}
+.blue {
+  background-color: var(--dark-color2);
+  margin-right: 8px;
+}
+.red {
+  background-color: var(--red-color);
+}
+.green {
+  background-color: var(--green-color);
 }
 .input {
   margin-bottom: 24px;
